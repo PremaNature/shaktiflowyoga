@@ -411,16 +411,41 @@
   }
 
   .check-field input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
-    min-width: 18px;
-    border-radius: 5px;
-    border: 1.5px solid rgba(138,155,122,0.4);
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .check-box {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    border-radius: 6px;
+    border: 1.5px solid rgba(138,155,122,0.5);
     background: white;
-    cursor: pointer;
     margin: 1px 0 0;
-    padding: 0;
-    accent-color: var(--sage);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+
+  .check-field input[type="checkbox"]:checked + .check-box {
+    background: var(--sage);
+    border-color: var(--sage);
+  }
+
+  .check-box svg {
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.2s cubic-bezier(0.34,1.56,0.64,1);
+  }
+
+  .check-field input[type="checkbox"]:checked + .check-box svg {
+    opacity: 1;
+    transform: scale(1);
   }
 
   .check-label {
@@ -734,6 +759,11 @@
       <!-- CONSENT -->
       <label class="check-field">
         <input type="checkbox" id="consent" name="whatsapp_consent" value="yes">
+        <div class="check-box">
+          <svg width="11" height="9" viewBox="0 0 11 9" fill="none">
+            <path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
         <span class="check-label">I'd like to receive class updates and wellness tips via WhatsApp. I can opt out anytime.</span>
       </label>
 
