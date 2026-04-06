@@ -432,7 +432,7 @@
     cursor: pointer;
   }
 
-  .check-field input[type="checkbox"]:checked + .check-box {
+  .check-box.checked {
     background: var(--sage);
     border-color: var(--sage);
   }
@@ -443,7 +443,7 @@
     transition: all 0.2s cubic-bezier(0.34,1.56,0.64,1);
   }
 
-  .check-field input[type="checkbox"]:checked + .check-box svg {
+  .check-box.checked svg {
     opacity: 1;
     transform: scale(1);
   }
@@ -757,15 +757,15 @@
       </div>
 
       <!-- CONSENT -->
-      <label class="check-field">
-        <input type="checkbox" id="consent" name="whatsapp_consent" value="yes">
-        <div class="check-box">
+      <div class="check-field" onclick="toggleConsent()" style="cursor:pointer;">
+        <input type="checkbox" id="consent" name="whatsapp_consent" value="yes" style="display:none;">
+        <div class="check-box" id="check-box-visual">
           <svg width="11" height="9" viewBox="0 0 11 9" fill="none">
             <path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
         <span class="check-label">I'd like to receive class updates and wellness tips via WhatsApp. I can opt out anytime.</span>
-      </label>
+      </div>
 
       <button class="submit-btn" type="submit">
         Reserve My Spot
@@ -859,7 +859,14 @@
     }
   }
 
-  // Animate radio cards subtly on load
+  function toggleConsent() {
+    const cb = document.getElementById('consent');
+    const visual = document.getElementById('check-box-visual');
+    cb.checked = !cb.checked;
+    visual.classList.toggle('checked', cb.checked);
+  }
+
+  
   document.querySelectorAll('.class-option input').forEach(radio => {
     radio.addEventListener('change', () => {
       document.querySelectorAll('.class-card').forEach(c => c.style.transition = 'all 0.25s ease');
